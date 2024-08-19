@@ -111,7 +111,7 @@ func GetRecipesByCategory(w http.ResponseWriter, r *http.Request) {
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 	defer cancel()
 
-	filter := bson.M{"category": category}
+	filter := bson.M{"category": bson.M{"$regex": category, "$options": "i"}}
 
 	// Start the find operation
 	cursor, err := collection.Find(ctx, filter)
