@@ -1,0 +1,35 @@
+version: '3.8'
+
+services:
+  # MongoDB Service
+  mongodb:
+    image: mongo:latest
+    container_name: mongodb
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
+    networks:
+      - app-network
+
+  # Backend Service
+  backend:
+    build: .
+    container_name: go-backend
+    ports:
+      - "8080:8080"
+    depends_on:
+      - mongodb
+    environment:
+      - MONGO_URI=mongodb://mongodb:27017/lazy_chef
+    networks:
+      - app-network
+    command: >
+      sh -c "until nc -z mongodb 27017; do echo 'Waiting for MongoDB...'; sleep 1; done && ./main"
+
+networks:
+  app-network:
+    driver: bridge
+
+volumes:
+  mongodb_data:

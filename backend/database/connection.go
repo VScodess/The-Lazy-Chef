@@ -3,6 +3,7 @@ package database
 import (
 	"context"
 	"log"
+	"os"
 	"time"
 
 	"go.mongodb.org/mongo-driver/mongo"
@@ -13,7 +14,14 @@ import (
 var Client *mongo.Client
 
 func Connect() {
-	clientOptions := options.Client().ApplyURI("mongodb://localhost:27017")
+
+	// Get MongoDB URI from environment variable
+	mongoURI := os.Getenv("MONGO_URI")
+	if mongoURI == "" {
+		mongoURI = "mongodb://localhost:27017" // Fallback to localhost for development
+	}
+
+	clientOptions := options.Client().ApplyURI(mongoURI)
 
 	client, err := mongo.NewClient(clientOptions)
 
