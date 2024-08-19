@@ -1,0 +1,115 @@
+/* src/pages/LandingPage.css */
+
+.container {
+  display: flex;
+  flex-direction: column; 
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #f0f0f0; 
+  font-family: 'Poppins', sans-serif; 
+  position: relative; /* Enable absolute positioning for the logo and text */
+}
+
+.logo-container {
+  position: absolute;
+  top: 20px; /* Distance from the top */
+  left: 20px; /* Distance from the left */
+  display: flex;
+  align-items: center;
+}
+
+.logo-container img {
+  width: 50px; /* Adjust logo size */
+  height: auto; /* Maintain aspect ratio */
+  margin-right: 10px; /* Space between logo and text */
+}
+
+.logo-container h1 {
+  font-size: 1.5em; /* Adjust text size */
+  color: #333; /* Text color */
+  margin: 0; /* Remove default margins */
+}
+
+.buttonGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* Two buttons per row */
+  gap: 30px; 
+  width: 100%; 
+  max-width: 800px; /* Limit the maximum width for layout */
+}
+
+.meal-button {
+  padding: 40px 50px; /* Consistent padding */
+  font-size: 2em; /* Consistent font size */
+  color: #333; 
+  border: none;
+  border-radius: 15px; 
+  cursor: pointer;
+  transition: all 0.3s ease; 
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2); 
+  display: flex; 
+  align-items: center;
+  justify-content: center; /* Center text and icon within the button */
+  width: 100%; 
+  height: 100%; 
+}
+
+.meal-button::before {
+  margin-right: 15px; /* Space between icon and text */
+  font-size: 1.5em; /* Adjust icon size */
+}
+
+.meal-button:nth-child(1)::before {
+  content: '🍳'; /* Breakfast icon */
+}
+
+.meal-button:nth-child(2)::before {
+  content: '🥗'; /* Lunch icon */
+}
+
+.meal-button:nth-child(3)::before {
+  content: '🍽️'; /* Dinner icon */
+}
+
+.meal-button:nth-child(4)::before {
+  content: '🍩'; /* Snacks icon */
+}
+
+.meal-button:nth-child(1) { 
+  background-color: #FFD700; 
+}
+
+.meal-button:nth-child(2) { 
+  background-color: #40E0D0; 
+}
+
+.meal-button:nth-child(3) { 
+  background-color: #FFA07A; 
+}
+
+.meal-button:nth-child(4) { 
+  background-color: #FF6347; /* Adjusted color for snacks */
+}
+
+.meal-button:hover {
+  transform: translateY(-2px); 
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); 
+}
+
+.meal-button:nth-child(1):hover {
+  background-color: #DAA520; 
+}
+
+.meal-button:nth-child(2):hover {
+  background-color: #00CED1;
+}
+
+.meal-button:nth-child(3):hover {
+  background-color: #FA8072;
+}
+
+.meal-button:nth-child(4):hover {
+  background-color: #FF4500; /* Adjusted hover color for snacks */
+}

@@ -1,0 +1,43 @@
+.tile-container {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.2s;
+  
+    &:hover {
+      transform: scale(1.02);
+    }
+  }
+  
+  .image {
+    width: 100%;
+    height: 200px; 
+    object-fit: cover;
+  }
+  
+  .content {
+    padding: 15px;
+  }
+  
+  .title {
+    margin-bottom: 5px;
+  }
+  
+  .summary {
+    font-size: 0.9em;
+    color: #555;
+  }
+  
+  .tags {
+    margin-top: 10px;
+  }
+  
+  .tag {
+    background-color: #eee;
+    color: #333;
+    padding: 5px 8px;
+    border-radius: 4px;
+    margin-right: 5px;
+    font-size: 0.8em;
+  }
