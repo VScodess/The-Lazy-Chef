@@ -17,10 +17,17 @@ A simple recipe book application.
 
 2. **Build and Run the Containers**:
 
+    Navigate to the backend folder
+
+    ```bash
+    cd backend
+    ```
+
     Use Docker Compose to build and run the backend along with MongoDB:
 
     ```bash
     docker-compose up --build
+    ```
 
 3. **Backend Port Information**
 
