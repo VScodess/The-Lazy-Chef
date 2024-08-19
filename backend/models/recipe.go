@@ -9,4 +9,5 @@ type Recipe struct {
 	Ingredients []string           `json:"ingredients"`
 	Steps       []string           `json:"steps"`
 	Tags        []string           `json:"tags"`
+	Summary     string             `json:"summary"`
 }
