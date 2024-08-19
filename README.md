@@ -52,7 +52,8 @@ The backend provides a set of RESTful API endpoints for managing recipes. Below 
       "category": "Dinner",
       "ingredients": ["Tomatoes", "Pasta", "Basil"],
       "steps": ["Boil water", "Cook pasta", "Prepare sauce"],
-      "tags": ["Vegetarian"]
+      "tags": ["Vegetarian"],
+      "summary": "A simple and quick pasta recipe with tomatoes and basil for a satisfying dinner."
     },
     ...
   ]
@@ -73,7 +74,8 @@ The backend provides a set of RESTful API endpoints for managing recipes. Below 
       "category": "Dinner",
       "ingredients": ["Tomatoes", "Pasta", "Basil"],
       "steps": ["Boil water", "Cook pasta", "Prepare sauce"],
-      "tags": ["Vegetarian"]
+      "tags": ["Vegetarian"],
+      "summary": "A simple and quick pasta recipe with tomatoes and basil for a satisfying dinner."
     },
     ...
   ]
@@ -90,7 +92,8 @@ The backend provides a set of RESTful API endpoints for managing recipes. Below 
     "category": "Dessert",
     "ingredients": ["Flour", "Sugar", "Cocoa powder", "Eggs", "Butter"],
     "steps": ["Preheat oven to 350F", "Mix ingredients", "Bake for 30 minutes"],
-    "tags": ["Sweet", "Baking"]
+    "tags": ["Sweet", "Baking"],
+    "summary": "A rich and moist chocolate cake that's perfect for any occasion."
   }
   ```
 - **Response Example**:
@@ -101,7 +104,8 @@ The backend provides a set of RESTful API endpoints for managing recipes. Below 
     "category": "Dessert",
     "ingredients": ["Flour", "Sugar", "Cocoa powder", "Eggs", "Butter"],
     "steps": ["Preheat oven to 350F", "Mix ingredients", "Bake for 30 minutes"],
-    "tags": ["Sweet", "Baking"]
+    "tags": ["Sweet", "Baking"],
+    "summary": "A rich and moist chocolate cake that's perfect for any occasion."
   }
   ```
 
@@ -119,7 +123,8 @@ The backend provides a set of RESTful API endpoints for managing recipes. Below 
       "category": "Dinner",
       "ingredients": ["Tomatoes", "Pasta", "Basil"],
       "steps": ["Boil water", "Cook pasta", "Prepare sauce"],
-      "tags": ["Vegetarian"]
+      "tags": ["Vegetarian"],
+      "summary": "A simple and quick pasta recipe with tomatoes and basil for a satisfying dinner."
   }
   ```
 
@@ -136,7 +141,8 @@ The backend provides a set of RESTful API endpoints for managing recipes. Below 
     "category": "Dinner",
     "ingredients": ["Tomatoes", "Spaghetti", "Basil"],
     "steps": ["Boil water", "Cook spaghetti", "Prepare sauce"],
-    "tags": ["Vegetarian", "Italian"]
+    "tags": ["Vegetarian", "Italian"],
+    "summary": "A simple and quick pasta recipe with tomatoes and basil for a satisfying dinner."
   }
   ```
 - **Response Example**:
@@ -147,7 +153,8 @@ The backend provides a set of RESTful API endpoints for managing recipes. Below 
     "category": "Dinner",
     "ingredients": ["Tomatoes", "Spaghetti", "Basil"],
     "steps": ["Boil water", "Cook spaghetti", "Prepare sauce"],
-    "tags": ["Vegetarian", "Italian"]
+    "tags": ["Vegetarian", "Italian"],
+    "summary": "A simple and quick pasta recipe with tomatoes and basil for a satisfying dinner."
   }
   ```
 
