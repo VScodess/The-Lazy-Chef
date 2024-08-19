@@ -10,10 +10,7 @@ const LandingPage = () => {
 
     return (
         <div className='container'>
-            <div className='logo-container'>
-                <img src='/catCook.png' alt='Website Logo' />
-                <h1>The Lazy Chef</h1>
-            </div>
+            
             <div className='buttonGrid'>
                 <button className='meal-button' onClick={() => handleButtonClick('breakfast')}>
                     Breakfast

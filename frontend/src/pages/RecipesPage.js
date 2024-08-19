@@ -75,12 +75,10 @@ const RecipeSummaryPage = () => {
 
   return (
     <div className="container">
-        <div className='logo-container'>
-                <img src='/catCook.png' alt='Website Logo' />
-                <h1>The Lazy Chef</h1>
-            </div>
-      {recipes.map((recipe) => (
-        <RecipeTile key={recipe.id} recipe={recipe} />
+            {recipes.map((recipe) => (
+        <div className="tile-container" key={recipe.id}> 
+          <RecipeTile recipe={recipe} />
+        </div>
       ))}
     </div>
   );

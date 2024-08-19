@@ -1,33 +1,38 @@
 .tile-container {
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    overflow: hidden;
-    cursor: pointer;
-    transition: transform 0.2s;
-  
-    &:hover {
-      transform: scale(1.02);
-    }
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.2s;
+  display: flex; /* Enable flexbox for the entire tile */
+
+  &:hover {
+    transform: scale(1.02);
   }
-  
-  .image {
-    width: 100%;
-    height: 200px; 
-    object-fit: cover;
-  }
-  
-  .content {
-    padding: 15px;
-  }
-  
-  .title {
-    margin-bottom: 5px;
-  }
-  
-  .summary {
-    font-size: 0.9em;
-    color: #555;
-  }
+}
+
+.image {
+  width: 30%; /* Adjust as needed */
+  height: auto; /* Maintain aspect ratio */
+  object-fit: cover;
+}
+
+.content {
+  padding: 15px;
+  flex: 1; /* Allow content to take up remaining space */
+  display: flex;
+  flex-direction: column; /* Arrange title and summary vertically */
+}
+
+.title {
+  margin-bottom: 5px;
+}
+
+.summary {
+  font-size: 0.9em;
+  color: #555;
+}
+
   
   .tags {
     margin-top: 10px;

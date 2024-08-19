@@ -7,6 +7,26 @@
   pointer-events: none;
 }
 
+.logo-container {
+  position: absolute;
+  top: 20px; /* Distance from the top */
+  left: 20px; /* Distance from the left */
+  display: flex;
+  align-items: center;
+}
+
+.logo-container img {
+  width: 50px; /* Adjust logo size */
+  height: auto; /* Maintain aspect ratio */
+  margin-right: 10px; /* Space between logo and text */
+}
+
+.logo-container h1 {
+  font-size: 1.5em; /* Adjust text size */
+  color: #333; /* Text color */
+  margin: 0; /* Remove default margins */
+}
+
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;

@@ -1,27 +1,12 @@
 .container {
   display: grid;
-  grid-template-columns: 1fr; /* One column for single-entry layout */
-  gap: 40px; /* Increased gap for better spacing */
-  padding: 40px; /* More padding for a spacious feel */
-  max-width: 800px; /* Limit container width for better readability */
-  margin: 0 auto; /* Center the container */
-}
-.logo-container {
-  position: absolute;
-  top: 20px; /* Distance from the top */
-  left: 20px; /* Distance from the left */
-  display: flex;
-  align-items: center;
+  grid-template-columns: 1fr; 
+  gap: 20px; /* Adjust the gap as needed for desired spacing */
+  padding: 40px; 
+  max-width: 800px; 
+  margin: 0 auto; 
 }
 
-.logo-container img {
-  width: 50px; /* Adjust logo size */
-  height: auto; /* Maintain aspect ratio */
-  margin-right: 10px; /* Space between logo and text */
-}
-
-.logo-container h1 {
-  font-size: 1.5em; /* Adjust text size */
-  color: #333; /* Text color */
-  margin: 0; /* Remove default margins */
+.tile-container { /* Target the RecipeTile container */
+  margin: 0; /* Remove any default margins */
 }

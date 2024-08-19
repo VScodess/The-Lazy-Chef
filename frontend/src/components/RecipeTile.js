@@ -11,6 +11,7 @@ const RecipeTile = ({ recipe }) => {
 
   return (
     <div className="tile-container" onClick={handleClick}>
+      <img className="image" src='/pancake.png' alt={recipe.name} />
       <div className="content">
         <h3 className="title">{recipe.name}</h3>
         <p className="summary">{recipe.summary}</p>

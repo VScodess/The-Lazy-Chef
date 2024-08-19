@@ -1,4 +1,10 @@
 /* src/pages/LandingPage.css */
+body { /* Or html */
+  background-color: #f0f0f0; 
+  font-family: 'Poppins', sans-serif; 
+}
+
+
 
 .container {
   display: flex;
@@ -11,25 +17,7 @@
   position: relative; /* Enable absolute positioning for the logo and text */
 }
 
-.logo-container {
-  position: absolute;
-  top: 20px; /* Distance from the top */
-  left: 20px; /* Distance from the left */
-  display: flex;
-  align-items: center;
-}
 
-.logo-container img {
-  width: 50px; /* Adjust logo size */
-  height: auto; /* Maintain aspect ratio */
-  margin-right: 10px; /* Space between logo and text */
-}
-
-.logo-container h1 {
-  font-size: 1.5em; /* Adjust text size */
-  color: #333; /* Text color */
-  margin: 0; /* Remove default margins */
-}
 
 .buttonGrid {
   display: grid;
