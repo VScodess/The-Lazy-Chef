@@ -18,6 +18,6 @@ func main() {
 	router := mux.NewRouter()
 	routes.SetupRoutes(router)
 
-	log.Println("Backed server running on port 8080")
+	log.Println("Backend server running on port 8080")
 	log.Fatal(http.ListenAndServe(":8080", router))
 }
