@@ -10,4 +10,5 @@ type Recipe struct {
 	Steps       []string           `json:"steps"`
 	Tags        []string           `json:"tags"`
 	Summary     string             `json:"summary"`
+	Image       []byte             `json:"image,omitempty" bson:"image,omitempty"`
 }

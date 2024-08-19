@@ -4,8 +4,11 @@ import (
 	"The-Lazy-Chef/backend/database"
 	"The-Lazy-Chef/backend/models"
 	"context"
+	"encoding/base64"
 	"encoding/json"
+	"io/ioutil"
 	"net/http"
+	"strings"
 	"time"
 
 	"github.com/gorilla/mux"
@@ -13,11 +16,8 @@ import (
 	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
-// Recipe struct with struct tags, provides metadata about struct fields
-// helps with marshalling and umarhsalling data. Think ID vs id
-
 func GetRecipes(w http.ResponseWriter, r *http.Request) {
-	var recipes []models.Recipe
+	var recipes []map[string]interface{}
 	collection := database.GetCollection("recipes")
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 	defer cancel()
@@ -33,7 +33,19 @@ func GetRecipes(w http.ResponseWriter, r *http.Request) {
 	for cursor.Next(ctx) {
 		var recipe models.Recipe
 		cursor.Decode(&recipe)
-		recipes = append(recipes, recipe)
+
+		responseRecipe := map[string]interface{}{
+			"id":          recipe.ID,
+			"name":        recipe.Name,
+			"category":    recipe.Category,
+			"ingredients": recipe.Ingredients,
+			"steps":       recipe.Steps,
+			"tags":        recipe.Tags,
+			"summary":     recipe.Summary,
+			"image":       base64.StdEncoding.EncodeToString(recipe.Image),
+		}
+
+		recipes = append(recipes, responseRecipe)
 	}
 
 	if err := cursor.Err(); err != nil {
@@ -47,34 +59,60 @@ func GetRecipes(w http.ResponseWriter, r *http.Request) {
 }
 
 func CreateRecipe(w http.ResponseWriter, r *http.Request) {
-	var recipe models.Recipe
-	_ = json.NewDecoder(r.Body).Decode(&recipe)
 
+	err := r.ParseMultipartForm(10 << 20)
+	if err != nil {
+		http.Error(w, "Unable to parse form", http.StatusBadRequest)
+		return
+	}
+
+	// Read the image file
+	file, _, err := r.FormFile("image")
+	if err != nil {
+		http.Error(w, "Error retrieving the image file", http.StatusBadRequest)
+		return
+	}
+	defer file.Close()
+
+	// Read the file into a byte slice
+	imageData, err := ioutil.ReadAll(file)
+	if err != nil {
+		http.Error(w, "Error reading the image file", http.StatusInternalServerError)
+		return
+	}
+
+	// Extract other form fields
+	name := r.FormValue("name")
+	category := r.FormValue("category")
+	ingredients := strings.Split(r.FormValue("ingredients"), ",")
+	steps := strings.Split(r.FormValue("steps"), ",")
+	tags := strings.Split(r.FormValue("tags"), ",")
+	summary := r.FormValue("summary")
+
+	recipe := models.Recipe{
+		ID:          primitive.NewObjectID(),
+		Name:        name,
+		Category:    category,
+		Ingredients: ingredients,
+		Steps:       steps,
+		Tags:        tags,
+		Summary:     summary,
+		Image:       imageData,
+	}
+
+	// Insert the recipe into the database
 	collection := database.GetCollection("recipes")
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 	defer cancel()
 
-	result, err := collection.InsertOne(ctx, recipe)
+	_, err = collection.InsertOne(ctx, recipe)
 	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
+		http.Error(w, "Error saving the recipe", http.StatusInternalServerError)
 		return
 	}
 
-	// Retrieve the inserted ID and add it to the response
-	insertedID := result.InsertedID.(primitive.ObjectID)
-
-	// Return the newly created recipe along with its MongoDB-generated _id
-	response := struct {
-		ID primitive.ObjectID `json:"id"`
-		models.Recipe
-	}{
-		ID:     insertedID,
-		Recipe: recipe,
-	}
-
-	// Encode the response as JSON and send it back to the client
 	w.Header().Set("Content-Type", "application/json")
-	json.NewEncoder(w).Encode(response)
+	json.NewEncoder(w).Encode(recipe)
 }
 
 func GetRecipe(w http.ResponseWriter, r *http.Request) {
@@ -99,8 +137,29 @@ func GetRecipe(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	// Encode the image to base64 to include in the response
+	response := struct {
+		ID          primitive.ObjectID `json:"id"`
+		Name        string             `json:"name"`
+		Category    string             `json:"category"`
+		Ingredients []string           `json:"ingredients"`
+		Steps       []string           `json:"steps"`
+		Tags        []string           `json:"tags"`
+		Summary     string             `json:"summary"`
+		Image       string             `json:"image"` // Base64 encoded image
+	}{
+		ID:          recipe.ID,
+		Name:        recipe.Name,
+		Category:    recipe.Category,
+		Ingredients: recipe.Ingredients,
+		Steps:       recipe.Steps,
+		Tags:        recipe.Tags,
+		Summary:     recipe.Summary,
+		Image:       base64.StdEncoding.EncodeToString(recipe.Image),
+	}
+
 	w.Header().Set("Content-Type", "application/json")
-	json.NewEncoder(w).Encode(recipe)
+	json.NewEncoder(w).Encode(response)
 }
 
 func GetRecipesByCategory(w http.ResponseWriter, r *http.Request) {
@@ -121,7 +180,7 @@ func GetRecipesByCategory(w http.ResponseWriter, r *http.Request) {
 	}
 	defer cursor.Close(ctx)
 
-	var recipes []models.Recipe
+	var responseRecipes []map[string]interface{}
 
 	for cursor.Next(ctx) {
 		var recipe models.Recipe
@@ -132,16 +191,27 @@ func GetRecipesByCategory(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 
-		recipes = append(recipes, recipe)
+		responseRecipe := map[string]interface{}{
+			"id":          recipe.ID,
+			"name":        recipe.Name,
+			"category":    recipe.Category,
+			"ingredients": recipe.Ingredients,
+			"steps":       recipe.Steps,
+			"tags":        recipe.Tags,
+			"summary":     recipe.Summary,
+			"image":       base64.StdEncoding.EncodeToString(recipe.Image),
+		}
+
+		responseRecipes = append(responseRecipes, responseRecipe)
 	}
 
-	if len(recipes) == 0 {
+	if len(responseRecipes) == 0 {
 		http.Error(w, "No recipes found for the given category", http.StatusNotFound)
 		return
 	}
 
 	w.Header().Set("Content-Type", "application/json")
-	json.NewEncoder(w).Encode(recipes)
+	json.NewEncoder(w).Encode(responseRecipes)
 }
 
 func UpdateRecipe(w http.ResponseWriter, r *http.Request) {
