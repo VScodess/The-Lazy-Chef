@@ -31,5 +31,5 @@ networks:
   app-network:
     driver: bridge
 
-volumes:
-  mongodb_data:
+# volumes:
+#   mongodb_data:
