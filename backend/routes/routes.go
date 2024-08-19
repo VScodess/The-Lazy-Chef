@@ -18,12 +18,12 @@ func SetupRoutes(router *mux.Router) {
 	router.HandleFunc("/recipes", handlers.CreateRecipe).Methods("POST")
 
 	// Get a recipe
-	router.HandleFunc("/recipes/{id}", handlers.GetRecipe).Methods("GET")
+	router.HandleFunc("/recipes/{category}/{id}", handlers.GetRecipe).Methods("GET")
 
 	// Update a recipe
-	router.HandleFunc("/recipes/{id}", handlers.UpdateRecipe).Methods("PUT")
+	router.HandleFunc("/recipes/{category}/{id}", handlers.UpdateRecipe).Methods("PUT")
 
 	// Delete a recipe
-	router.HandleFunc("/recipes/{id}", handlers.DeleteRecipe).Methods("DELETE")
+	router.HandleFunc("/recipes/{category}/{id}", handlers.DeleteRecipe).Methods("DELETE")
 
 }
