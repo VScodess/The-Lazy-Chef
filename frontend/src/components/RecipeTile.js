@@ -6,12 +6,12 @@ const RecipeTile = ({ recipe }) => {
   const navigate = useNavigate();
 
   const handleClick = () => {
-    navigate(`/${recipe.mealType}/${recipe.id}`); 
+    navigate(`/${recipe.category}/${recipe.id}`); 
   };
 
   return (
     <div className="tile-container" onClick={handleClick}>
-      <img className="image" src='/pancake.png' alt={recipe.name} />
+     <img src={`data:image/jpeg;base64,${recipe.image}`} alt="Recipe Image" style={{ maxWidth: '200px' }} />
       <div className="content">
         <h3 className="title">{recipe.name}</h3>
         <p className="summary">{recipe.summary}</p>

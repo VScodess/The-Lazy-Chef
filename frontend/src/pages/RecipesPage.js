@@ -3,85 +3,71 @@ import { useParams } from 'react-router-dom';
 import './RecipesPage.css';
 import RecipeTile from '../components/RecipeTile.js';
 
-const recipesData = [
-  {
-    id: 1,
-    name: 'Fluffy Pancakes',
-    mealType: 'breakfast',
-    tags: ['vegetarian'],
-    summary: 'A classic breakfast treat, light and fluffy pancakes topped with your favorite syrup and fruit.',
-  },
-  {
-    id: 2,
-    name: 'Avocado Toast with Egg',
-    mealType: 'breakfast',
-    tags: ['vegetarian'],
-    summary: 'A healthy and satisfying breakfast option, creamy avocado on toast with a perfectly cooked egg.',
-  },
-  {
-    id: 3,
-    name: 'Caprese Salad',
-    mealType: 'lunch',
-    tags: ['vegetarian', 'vegan'],
-    summary: 'A refreshing and simple salad with juicy tomatoes, fresh mozzarella, and fragrant basil.',
-  },
-  {
-    id: 4,
-    name: 'Grilled Chicken Caesar Salad',
-    mealType: 'lunch',
-    tags: ['non-vegetarian'],
-    summary: 'A classic Caesar salad with grilled chicken, crisp romaine lettuce, and a creamy dressing.',
-  },
-  {
-    id: 5,
-    name: 'Spaghetti Bolognese',
-    mealType: 'dinner',
-    tags: ['non-vegetarian'],
-    summary: 'A hearty and comforting Italian dish with a rich meat sauce and spaghetti.',
-  },
-  {
-    id: 6,
-    name: 'Vegetable Curry',
-    mealType: 'dinner',
-    tags: ['vegetarian', 'vegan'],
-    summary: 'A flavorful and aromatic curry with a variety of vegetables simmered in a creamy coconut sauce.',
-  },
-  {
-    id: 7,
-    name: 'Trail Mix',
-    mealType: 'snacks',
-    tags: ['vegetarian', 'vegan'],
-    summary: 'A mix of nuts, seeds, and dried fruits for a quick and healthy energy boost.',
-  },
-  {
-    id: 8,
-    name: 'Hummus with Pita Bread',
-    mealType: 'snacks',
-    tags: ['vegetarian', 'vegan'],
-    summary: 'A creamy and flavorful dip made from chickpeas, perfect for dipping with pita bread or vegetables.',
-  },
-];
-
 const RecipeSummaryPage = () => {
-  const { mealType } = useParams();
-  const [recipes, setRecipes] = useState([]);
+ const { mealType } = useParams();
+ const [recipes, setRecipes] = useState([]);
+ const [loading, setLoading] = useState(true);
+ const [error, setError] = useState(null);
 
-  useEffect(() => {
-    const filteredRecipes = recipesData.filter(
-      (recipe) => recipe.mealType === mealType
-    );
-    setRecipes(filteredRecipes);
-  }, [mealType]);
+useEffect(() => {
+const fetchRecipes = async () => {
+try {
+const response = await fetch(`http://localhost:8080/recipes/${mealType}`);
+if (!response.ok) {
+throw new Error('Failed to fetch recipes');
+}
+ const data = await response.json();
+ setRecipes(data);
+} catch (err) {
+ setError(err.message);
+} finally {
+setLoading(false);
+}
+};
 
-  return (
-    <div className="container">
-            {recipes.map((recipe) => (
-        <div className="tile-container" key={recipe.id}> 
-          <RecipeTile recipe={recipe} />
-        </div>
-      ))}
-    </div>
-  );
+fetchRecipes();
+}, [mealType]);
+
+if (loading) {
+return <p>Loading...</p>;
+}
+
+if (error) {
+return <p>Error: {error}</p>;
+}
+
+const handleDelete = async (recipeId) => {
+try {
+const response = await fetch(`http://localhost:8080/recipes/${mealType}/${recipeId}`, { 
+method: 'DELETE',
+});
+
+if (!response.ok) {
+throw new Error('Failed to delete recipe');
+}
+setRecipes(recipes.filter((recipe) => recipe.id !== recipeId));
+} catch (err) {
+   setError(err.message);
+}
+};
+
+if (loading) {
+return <p>Loading...</p>;
+}
+
+ if (error) {
+return <p>Error: {error}</p>;
+}
+
+return (
+<div className="container">
+{recipes.map((recipe) => (
+<div className="tile-container" key={recipe.id}>
+<RecipeTile recipe={recipe} />
+<button onClick={() => handleDelete(recipe.id)}>Delete</button>
+</div>
+))}
+</div>);
 };
 
 export default RecipeSummaryPage;

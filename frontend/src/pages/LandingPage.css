@@ -101,3 +101,54 @@ body { /* Or html */
 .meal-button:nth-child(4):hover {
   background-color: #FF4500; /* Adjusted hover color for snacks */
 }
+.form-container {
+  background-color: #f5f5f5; /* Soft off-white background for the form */
+  padding: 30px;
+  border-radius: 15px; /* Maintain rounded corners */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Slightly more pronounced shadow */
+  max-width: 600px; 
+  margin: 20px auto;
+  font-family: 'Poppins', sans-serif; /* Consistent with the rest of the page */
+}
+
+.form-container h2 {
+  margin-bottom: 20px;
+  text-align: center;
+  font-size: 1.8em;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3); /* Add depth to the heading */
+}
+
+.form-container form {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-container label {
+  margin-bottom: 5px;
+  font-weight: 500; /* Slightly less bold */
+}
+
+.form-container input[type="text"],
+.form-container textarea,
+.form-container select {
+  padding: 12px;
+  margin-bottom: 15px;
+  border: 1px solid #ddd; /* Lighter border */
+  border-radius: 8px;
+  font-size: 1em;
+}
+
+.form-container button[type="submit"] {
+  background-color: #4CAF50; /* Green submit button */
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  font-size: 1.2em;
+}
+
+.form-container button[type="submit"]:hover {
+  background-color: #3e8e41;
+}
