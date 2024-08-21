@@ -132,8 +132,8 @@ html {
 input::placeholder,
 textarea::placeholder,
 select::placeholder {
-  font-size: 1em;
-  font-family: 'Poppins', monospace;
+  font-size: 0.9em;
+  font-family: 'Poppins', sans-serif;
   color: #999;
   opacity: 1;
 }
