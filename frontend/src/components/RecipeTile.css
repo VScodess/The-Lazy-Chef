@@ -1,48 +1,64 @@
 .tile-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
   border: 1px solid #ccc;
   border-radius: 8px;
-  overflow: hidden;
-  cursor: pointer;
-  transition: transform 0.2s;
-  display: flex; /* Enable flexbox for the entire tile */
-
-  &:hover {
-    transform: scale(1.02);
-  }
+  margin-bottom: 10px;
+  background-color: #f9f9f9;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.image {
-  width: 30%; /* Adjust as needed */
-  height: auto; /* Maintain aspect ratio */
+.tile-container img {
+  max-width: 100px;
+  max-height: 100px;
+  margin-right: 15px;
+  border-radius: 8px;
   object-fit: cover;
 }
 
 .content {
-  padding: 15px;
-  flex: 1; /* Allow content to take up remaining space */
+  flex: 1;
   display: flex;
-  flex-direction: column; /* Arrange title and summary vertically */
+  flex-direction: column;
+  justify-content: center;
 }
 
 .title {
+  font-size: 1.2em;
+  font-weight: bold;
   margin-bottom: 5px;
 }
 
 .summary {
   font-size: 0.9em;
-  color: #555;
+  color: #666;
+  margin-bottom: 5px;
 }
 
-  
-  .tags {
-    margin-top: 10px;
-  }
-  
-  .tag {
-    background-color: #eee;
-    color: #333;
-    padding: 5px 8px;
-    border-radius: 4px;
-    margin-right: 5px;
-    font-size: 0.8em;
-  }
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.tag {
+  background-color: #e0e0e0;
+  color: #333;
+  padding: 3px 6px;
+  border-radius: 3px;
+  font-size: 0.8em;
+  margin-right: 5px;
+  margin-bottom: 5px;
+}
+
+button {
+  background-color: #ff6666;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 0.9em;
+  align-self: center;
+}

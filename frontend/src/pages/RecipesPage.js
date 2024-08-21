@@ -60,7 +60,7 @@ const RecipeSummaryPage = () => {
          {recipes.map((recipe) => (
             <div className="tile-container" key={recipe.id}>
                <RecipeTile recipe={recipe} />
-               <button onClick={() => handleDelete(recipe.id)}>Delete</button>
+               <button onClick={() => handleDelete(recipe.id)} className="delete-button">Delete</button>
             </div>
          ))}
       </div>
