@@ -67,117 +67,135 @@ const LandingPage = () => {
   };
 
   return (
-    <div className="container">
-      <button onClick={handleAddRecipeClick}>Add New Recipe</button>
-
+    <div className="landing-container">
       {showAddRecipeForm && (
-        <div className="form-container"> {/* Add a container for the form */}
-          <h2>Add New Recipe</h2>
-          <form onSubmit={handleAddRecipeSubmit}>
-            <div>
-              <label htmlFor="name">Name:</label>
-              <input
-                type="text"
-                id="name"
-                name="name"
-                value={newRecipe.name}
-                onChange={handleInputChange}
-                required
-              />
-            </div>
-            <div>
-              <label htmlFor="category">Category:</label>
+        <div
+          className="form-overlay"
+          onClick={() => setShowAddRecipeForm(false)}
+        >
+          <div
+            className="form-container"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <h2>Add New Recipe</h2>
+            <form onSubmit={handleAddRecipeSubmit}>
 
-              <select
-                id="category"
-                name="category"
-                value={newRecipe.category}
-                onChange={handleInputChange}
+              <div>
+                <label htmlFor="name">Name</label>
+                <input
+                  type="text"
+                  id="name"
+                  name="name"
+                  value={newRecipe.name}
+                  onChange={handleInputChange}
+                  required
+                  placeholder="What should we call this masterpiece?"
+                />
+              </div>
 
-                required
-              >
-                <option value="">Select Category</option> {/* Add a default option */}
-                <option value="breakfast">Breakfast</option>
-                <option value="lunch">Lunch</option>
-                <option value="dinner">Dinner</option>
-                <option
-                  value="snacks">Snacks</option>
-              </select>
-            </div>
-            <div>
+              <div>
+                <label htmlFor="category">Category</label>
+                <select
+                  id="category"
+                  name="category"
+                  value={newRecipe.category}
+                  onChange={handleInputChange}
+                  required
+                >
+                  <option value="">Choose a category...</option>
+                  <option value="breakfast">Breakfast</option>
+                  <option value="lunch">Lunch</option>
+                  <option value="dinner">Dinner</option>
+                  <option value="snacks">Snacks</option>
+                </select>
+              </div>
 
-              <label htmlFor="summary">Summary:</label>
-              <textarea
-                id="summary"
-                name="summary"
-                value={newRecipe.summary}
-                onChange={handleInputChange}
-                required
-              />
-            </div>
-            <div>
-              <label htmlFor="ingredients">Ingredients (comma-separated):</label>
-              <textarea
-                id="ingredients"
-                name="ingredients"
-                value={newRecipe.ingredients.join(', ')}
-                onChange={(e) =>
-                  setNewRecipe({
-                    ...newRecipe,
-                    ingredients: e.target.value
-                      .split(',')
-                      .map((item) => item.trim()),
-                  })
-                }
-                required
-              />
-            </div>
-            <div>
-              <label htmlFor="steps">Steps (one step per line):</label>
-              <textarea
-                id="steps"
-                name="steps"
-                value={newRecipe.steps.join('\n')}
-                onChange={(e) =>
-                  setNewRecipe({
-                    ...newRecipe,
-                    steps: e.target.value.split('\n'),
-                  })
-                }
-                required
-              />
-            </div>
-            <div>
-              <label htmlFor="tags">Tags (comma-separated):</label>
-              <input
-                type="text"
-                id="tags"
-                name="tags"
-                value={newRecipe.tags.join(', ')}
-                onChange={(e) =>
-                  setNewRecipe({
-                    ...newRecipe,
-                    tags: e.target.value
-                      .split(',')
-                      .map((item) => item.trim()),
-                  })
-                }
-              />
-            </div>
-            <div>
-              <label htmlFor="image">Image:</label>
-              <input
-                type="file"
-                id="image"
-                name="image"
-                accept="image/*"
-                onChange={handleImageUpload}
-              />
-            </div>
-            <button type="submit">Submit</button>
-          </form>
+              <div>
+                <label htmlFor="summary">Summary</label>
+                <textarea
+                  id="summary"
+                  name="summary"
+                  value={newRecipe.summary}
+                  onChange={handleInputChange}
+                  required
+                  placeholder="Describe your recipe in a delicious one-liner!"
+                />
+              </div>
+
+              <div>
+                <label htmlFor="ingredients">Ingredients</label>
+                <textarea
+                  id="ingredients"
+                  name="ingredients"
+                  value={newRecipe.ingredients.join(', ')}
+                  onChange={(e) =>
+                    setNewRecipe({
+                      ...newRecipe,
+                      ingredients: e.target.value
+                        .split(',')
+                        .map((item) => item.trim()),
+                    })
+                  }
+                  required
+                  placeholder="What do we need? List ingredients, separated by commas"
+                />
+              </div>
+
+              <div>
+                <label htmlFor="steps">Steps</label>
+                <textarea
+                  id="steps"
+                  name="steps"
+                  value={newRecipe.steps.join('\n')}
+                  onChange={(e) =>
+                    setNewRecipe({
+                      ...newRecipe,
+                      steps: e.target.value.split('\n'),
+                    })
+                  }
+                  required
+                  placeholder="Step-by-step: One instruction per line, please!"
+                />
+              </div>
+
+              <div>
+                <label htmlFor="tags">Tags</label>
+                <input
+                  type="text"
+                  id="tags"
+                  name="tags"
+                  value={newRecipe.tags.join(', ')}
+                  onChange={(e) =>
+                    setNewRecipe({
+                      ...newRecipe,
+                      tags: e.target.value
+                        .split(',')
+                        .map((item) => item.trim()),
+                    })
+                  }
+                  required
+                  placeholder="How would you tag this? (e.g., spicy, vegan)"
+                />
+              </div>
+
+              <div className="file-upload-container">
+                <label htmlFor="image">Image:</label>
+                <input
+                  type="file"
+                  id="image"
+                  name="image"
+                  accept="image/*"
+                  onChange={handleImageUpload}
+                  required
+                />
+              </div>
+
+              <button type="submit">Submit</button>
+            </form>
+          </div>
         </div>
       )}
+
 
       <div className="buttonGrid">
 
@@ -193,6 +211,7 @@ const LandingPage = () => {
         <button className='meal-button' onClick={() => handleButtonClick('snacks')}>
           Snacks
         </button>
+        <button className='meal-button add-recipe-button' onClick={handleAddRecipeClick}>Add your recipe</button>
       </div>
     </div>
   );
