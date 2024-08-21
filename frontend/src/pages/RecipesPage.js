@@ -14,7 +14,11 @@ const RecipeSummaryPage = () => {
          try {
             const response = await fetch(`http://localhost:8080/recipes/${mealType}`);
             if (!response.ok) {
-               throw new Error('Failed to fetch recipes');
+               if (response.status === 404) {
+                  throw new Error('No recipes found for the given category.');
+               } else {
+                  throw new Error('Failed to fetch recipes');
+               }
             }
             const data = await response.json();
             setRecipes(data);
@@ -51,14 +55,6 @@ const RecipeSummaryPage = () => {
       }
    };
 
-   if (loading) {
-      return <p>Loading...</p>;
-   }
-
-   if (error) {
-      return <p>Error: {error}</p>;
-   }
-
    return (
       <div className="container">
          {recipes.map((recipe) => (
@@ -67,7 +63,8 @@ const RecipeSummaryPage = () => {
                <button onClick={() => handleDelete(recipe.id)}>Delete</button>
             </div>
          ))}
-      </div>);
+      </div>
+   );
 };
 
 export default RecipeSummaryPage;
