@@ -3,16 +3,17 @@ import { useNavigate } from 'react-router-dom';
 import './LandingPage.css';
 
 const LandingPage = () => {
-  const   
- navigate = useNavigate();
-  const   
- [showAddRecipeForm, setShowAddRecipeForm] = useState(false);
+  const
+    navigate = useNavigate();
+  const
+    [showAddRecipeForm, setShowAddRecipeForm] = useState(false);
   const [newRecipe, setNewRecipe] = useState({
     name: '',
     category: '',
     ingredients: [],
     steps: [],
     tags: [],
+    summary: '',
     image: null,
   });
 
@@ -41,10 +42,13 @@ const LandingPage = () => {
       const formData = new FormData();
       formData.append('name', newRecipe.name);
       formData.append('category', newRecipe.category);
-      // ... append other fields (ingredients, steps, tags) as needed
+      formData.append('ingredients', newRecipe.ingredients);
+      formData.append('summary', newRecipe.summary);
+      formData.append('steps', newRecipe.steps);
+      formData.append('tags', newRecipe.tags);
       formData.append('image', newRecipe.image);
 
-      const response = await fetch('http://localhost:8080/recipes', { 
+      const response = await fetch('http://localhost:8080/recipes', {
         method: 'POST',
         body: formData,
       });
@@ -54,7 +58,7 @@ const LandingPage = () => {
       }
 
       setShowAddRecipeForm(false);
-      // ... you might want to reset the newRecipe state here
+
       alert('Recipe added successfully!');
     } catch (err) {
       console.error('Error adding recipe:', err);
@@ -82,13 +86,13 @@ const LandingPage = () => {
               />
             </div>
             <div>
-              <label htmlFor="category">Category:</label>   
+              <label htmlFor="category">Category:</label>
 
               <select
                 id="category"
                 name="category"
                 value={newRecipe.category}
-                onChange={handleInputChange}   
+                onChange={handleInputChange}
 
                 required
               >
@@ -96,11 +100,11 @@ const LandingPage = () => {
                 <option value="breakfast">Breakfast</option>
                 <option value="lunch">Lunch</option>
                 <option value="dinner">Dinner</option>
-                <option   
- value="snacks">Snacks</option>
+                <option
+                  value="snacks">Snacks</option>
               </select>
             </div>
-            <div>   
+            <div>
 
               <label htmlFor="summary">Summary:</label>
               <textarea
@@ -133,7 +137,7 @@ const LandingPage = () => {
               <textarea
                 id="steps"
                 name="steps"
-                value={newRecipe.steps.join('\n')} 
+                value={newRecipe.steps.join('\n')}
                 onChange={(e) =>
                   setNewRecipe({
                     ...newRecipe,
@@ -177,21 +181,21 @@ const LandingPage = () => {
 
       <div className="buttonGrid">
 
-                <button className='meal-button' onClick={() => handleButtonClick('breakfast')}>
-                    Breakfast
-                </button>
-                <button className='meal-button' onClick={() => handleButtonClick('lunch')}>
-                    Lunch
-                </button>
-                <button className='meal-button' onClick={() => handleButtonClick('dinner')}>
-                    Dinner
-                </button>
-                <button className='meal-button' onClick={() => handleButtonClick('snacks')}>
-                    Snacks
-                </button>
-            </div>
-        </div>
-    );
+        <button className='meal-button' onClick={() => handleButtonClick('breakfast')}>
+          Breakfast
+        </button>
+        <button className='meal-button' onClick={() => handleButtonClick('lunch')}>
+          Lunch
+        </button>
+        <button className='meal-button' onClick={() => handleButtonClick('dinner')}>
+          Dinner
+        </button>
+        <button className='meal-button' onClick={() => handleButtonClick('snacks')}>
+          Snacks
+        </button>
+      </div>
+    </div>
+  );
 };
 
 export default LandingPage;
