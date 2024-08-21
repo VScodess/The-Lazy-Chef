@@ -17,7 +17,7 @@ const RecipeTile = ({ recipe }) => {
         className="recipe-image"
       />
       <div className="content">
-        <h3 className="title">{recipe.name}</h3>
+        <h3 className="tile-title">{recipe.name}</h3>
         <p className="summary">{recipe.summary}</p>
         <div className="tags">
           {recipe.tags.map((tag, index) => (

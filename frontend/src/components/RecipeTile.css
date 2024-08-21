@@ -8,6 +8,7 @@
   margin-bottom: 10px;
   background-color: #f9f9f9;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  width: 100%;
 }
 
 .tile-container img {
@@ -25,7 +26,7 @@
   justify-content: center;
 }
 
-.title {
+.tile-title {
   font-size: 1.2em;
   font-weight: bold;
   margin-bottom: 5px;
@@ -34,11 +35,12 @@
 .summary {
   font-size: 0.9em;
   color: #666;
-  margin-bottom: 5px;
+  margin-bottom: 20px;
 }
 
 .tags {
   display: flex;
+  justify-content: center;
   flex-wrap: wrap;
 }
 
