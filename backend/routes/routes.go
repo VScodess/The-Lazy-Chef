@@ -11,6 +11,9 @@ func SetupRoutes(router *mux.Router) {
 	// Get all recipes
 	router.HandleFunc("/recipes", handlers.GetRecipes).Methods("GET")
 
+	// Search recipes (This should be above the category route)
+	router.HandleFunc("/recipes/search", handlers.SearchRecipes).Methods("GET")
+
 	// Get all recipes by category
 	router.HandleFunc("/recipes/{category}", handlers.GetRecipesByCategory).Methods("GET")
 
@@ -26,7 +29,5 @@ func SetupRoutes(router *mux.Router) {
 	// Delete a recipe
 	router.HandleFunc("/recipes/{category}/{id}", handlers.DeleteRecipe).Methods("DELETE")
 
-	// Search recipes
-	router.HandleFunc("/recipes/search", handlers.SearchRecipe).Methods("GET");
 
 }

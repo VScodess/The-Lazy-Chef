@@ -7,6 +7,7 @@ import (
 	"encoding/base64"
 	"encoding/json"
 	"io/ioutil"
+	"log"
 	"net/http"
 	"strings"
 	"time"
@@ -14,6 +15,7 @@ import (
 	"github.com/gorilla/mux"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/bson/primitive"
+	"go.mongodb.org/mongo-driver/mongo/options"
 )
 
 func GetRecipes(w http.ResponseWriter, r *http.Request) {
@@ -290,4 +292,57 @@ func DeleteRecipe(w http.ResponseWriter, r *http.Request) {
 		map[string]string{
 			"message": "Recipe was deleted successfully"})
 
+}
+
+func SearchRecipes(w http.ResponseWriter, r *http.Request) {
+	query := r.URL.Query().Get("q")
+
+	if query == "" {
+		http.Error(w, "Query parameter 'q' is requried", http.StatusBadRequest)
+		return
+	}
+
+	collection := database.GetCollection("recipes")
+	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
+	defer cancel()
+
+	filter := bson.M{
+		"$text": bson.M{
+			"$search": query,
+		},
+	}
+
+	opts := options.Find().SetSort(bson.M{"score": bson.M{"$meta": "textScore"}})
+
+	cursor, err := collection.Find(ctx, filter, opts)
+	if err != nil {
+		http.Error(w, "Could no perform search", http.StatusInternalServerError)
+		return
+	}
+	defer cursor.Close(ctx)
+
+	log.Println("Search query:", query)
+	log.Println("Filter applied:", filter)
+
+	var recipes []models.Recipe
+	for cursor.Next(ctx) {
+		var recipe models.Recipe
+
+		err := cursor.Decode(&recipe)
+		if err != nil {
+			http.Error(w, "Error decoding search result", http.StatusInternalServerError)
+			return
+		}
+
+		recipes = append(recipes, recipe)
+
+	}
+
+	if len(recipes) == 0 {
+		http.Error(w, "No recipes found with your matching search", http.StatusNotFound)
+		return
+	}
+
+	w.Header().Set("Content-Type", "application/json")
+	json.NewEncoder(w).Encode(recipes)
 }
