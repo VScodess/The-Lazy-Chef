@@ -11,5 +11,15 @@
 
 .navbar-brand span {
     font-size: 1 em;
-    color: #333;
+    color: white;
 }
+
+.navbar-custom {
+    background-color: black;
+}
+
+.custom-search-button {
+    background-color: #28a745 !important;
+    color: white;
+    border: white;
+  }

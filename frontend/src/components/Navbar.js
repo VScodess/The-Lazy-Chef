@@ -10,15 +10,15 @@ const Navbar = () => {
     };
 
     return (
-        <nav className="navbar bg-body-tertiary fixed-top">
+        <nav className="navbar fixed-top navbar-custom">
             <div className="container-fluid">
                 <div className="navbar-brand" onClick={handleLogoClick}>
                     <img src="/catCook.png" alt="Website Logo" />
                     <span>The Lazy Chef</span>
                 </div>
                 <form className="d-flex" role="search">
-                    <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
-                    <button className="btn btn-outline-success" type="submit">Search</button>
+                    <input className="form-control me-2" type="search" placeholder="Look up a recipe" aria-label="Search" />
+                    <button className="btn custom-search-button" type="submit">Search</button>
                 </form>
             </div>
         </nav>
