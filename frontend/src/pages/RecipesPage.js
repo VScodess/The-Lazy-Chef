@@ -56,7 +56,7 @@ const RecipeSummaryPage = () => {
    };
 
    return (
-      <div className="container">
+      <div className="recipe-container">
          {recipes.map((recipe) => (
             <div className="tile-container" key={recipe.id}>
                <RecipeTile recipe={recipe} />
