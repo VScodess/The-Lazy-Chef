@@ -10,6 +10,7 @@ body {
   height: 100vh;
   padding-top: 75px;
   box-sizing: border-box;
+  padding-right: 5px;
   overflow-y: auto;
 }
 
@@ -29,7 +30,6 @@ body {
 }
 
 .recipe-tile-container {
-  /* padding: 20px; */
   box-sizing: border-box;
   border-radius: 8px;
   flex: 1;
@@ -50,5 +50,4 @@ button.delete-button {
   cursor: pointer;
   font-size: 0.9em;
   max-width: 100%;
-  /* Ensure the button doesn't overflow the grid slot */
 }
