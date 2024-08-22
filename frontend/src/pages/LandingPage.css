@@ -4,11 +4,8 @@ html {
   margin: 0;
   display: flex;
   justify-content: center;
-
   align-items: center;
 }
-
-
 
 .landing-container {
   display: flex;
@@ -18,8 +15,6 @@ html {
   font-family: 'Poppins', sans-serif;
   position: relative;
 }
-
-
 
 .buttonGrid {
   display: grid;

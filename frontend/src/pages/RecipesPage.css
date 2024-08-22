@@ -1,18 +1,22 @@
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow: hidden;
+}
+
 .recipe-container {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 20px;
   padding: 20px;
-  max-width: 1300px;
-  padding-left: calc(60px + 10px);
-  margin-top: 50px;
-  justify-content: center;
+  margin-top: 100px;
+  box-sizing: border-box;
+  height: 100vh;
+  overflow-y: auto;
 }
 
-.tile-container {
-  background-color: #f9f9f9;
+.recipe-grid-tile-container {
   padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  box-sizing: border-box;
 }

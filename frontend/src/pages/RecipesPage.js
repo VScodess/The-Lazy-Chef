@@ -58,7 +58,7 @@ const RecipeSummaryPage = () => {
    return (
       <div className="recipe-container">
          {recipes.map((recipe) => (
-            <div className="tile-container" key={recipe.id}>
+            <div className="recipe-grid-tile-container" key={recipe.id}>
                <RecipeTile recipe={recipe} />
                <button onClick={() => handleDelete(recipe.id)} className="delete-button">Delete</button>
             </div>
