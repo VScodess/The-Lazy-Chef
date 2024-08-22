@@ -1,20 +1,19 @@
 .rd_container {
-  
-  max-width: 800px;
+  width: 800px;
+  height: 80vh;
   margin: 30px auto;
   padding: 20px;
   border: 1px solid #ccc;
   border-radius: 8px;
   text-align: left;
-  overflow-y: auto; /* Enable vertical scrolling */
-  max-height: 80vh; /* Set a maximum height to allow space for scrolling */
+  overflow-y: auto;
 }
 
 .rd-title-container {
   display: flex;
   align-items: center;
   margin-bottom: 20px;
-  margin-left: 25%;
+  justify-content: center;
 }
 
 .recipe-image {
