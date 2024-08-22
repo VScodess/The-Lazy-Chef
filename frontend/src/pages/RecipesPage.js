@@ -57,15 +57,19 @@ const RecipeSummaryPage = () => {
 
    return (
       <div className="recipe-wrapper">
-         <div className="recipe-grid-container">
-            {recipes.map((recipe) => (
-               <div className="recipe-tile-container" key={recipe.id}>
-                  <RecipeTile recipe={recipe} />
-                  <button onClick={() => handleDelete(recipe.id)} className="delete-button">Delete</button>
-               </div>
-            ))}
-         </div>
+      <div className="recipe-grid-container">
+        {recipes.map((recipe) => (
+          <div className="recipe-tile-grid" key={recipe.id}>
+            <div className="recipe-tile-container">
+              <RecipeTile recipe={recipe} />
+            </div>
+            <div className="delete-button-container">
+              <button onClick={() => handleDelete(recipe.id)} className="delete-button">Delete</button>
+            </div>
+          </div>
+        ))}
       </div>
+    </div>
    );
 };
 

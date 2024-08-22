@@ -16,26 +16,39 @@ body {
 .recipe-grid-container {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
+  gap: 40px;
   padding: 20px;
   box-sizing: border-box;
 }
 
-.recipe-tile-container {
-  padding: 20px;
-  box-sizing: border-box;
+.recipe-tile-grid {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  height: 100%;
+}
+
+.recipe-tile-container {
+  /* padding: 20px; */
+  box-sizing: border-box;
+  border-radius: 8px;
+  flex: 1;
+}
+
+.delete-button-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
 }
 
 button.delete-button {
   background-color: #ff6666;
   color: white;
   border: none;
-  padding: 8px 10px;
+  padding: 10px;
   border-radius: 5px;
   cursor: pointer;
   font-size: 0.9em;
-  align-self: center;
+  max-width: 100%;
+  /* Ensure the button doesn't overflow the grid slot */
 }
