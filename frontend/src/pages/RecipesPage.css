@@ -2,14 +2,14 @@ html,
 body {
   margin: 0;
   padding: 0;
-  height: 100%;
-  overflow: hidden;
+  overflow-y: hidden;
 }
 
 .recipe-wrapper {
-  height: 100vh;
+  position: relative;
+  margin-top: 67px;
+  height: calc(100vh - 67px);
   box-sizing: border-box;
-  padding-right: 5px;
   overflow-y: auto;
 }
 
