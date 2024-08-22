@@ -1,10 +1,13 @@
 .rd_container {
+  
   max-width: 800px;
   margin: 30px auto;
   padding: 20px;
   border: 1px solid #ccc;
   border-radius: 8px;
-  text-align: left; /* Left-align all elements by default */
+  text-align: left;
+  overflow-y: auto; /* Enable vertical scrolling */
+  max-height: 80vh; /* Set a maximum height to allow space for scrolling */
 }
 
 .rd-title-container {
@@ -15,31 +18,32 @@
 }
 
 .recipe-image {
-  width: 100px; /* Adjust as needed */
+  width: 150px;
   height: auto;
 }
 
 .rd-title {
   margin: 0;
-  text-align: center; /* Align title to the left */
+  text-align: center;
 }
 
 .ing_section {
   margin-bottom: 30px;
-  margin-right: 500px;
-}
-
-.section {
-  margin-bottom: 30px;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 20px;
+  align-items: start;
 }
 
 .section-title {
+  grid-column: span 2;
   margin-bottom: 10px;
 }
 
 .ing_list {
   list-style-type: disc;
   padding-left: 2ch;
+  margin: 0;
 }
 
 .ing_list-item {
@@ -47,7 +51,7 @@
 }
 
 .ins_list {
-  list-style-type: decimal; /* Numbered list */
+  list-style-type: decimal;
   padding-left: 2ch;
 }
 

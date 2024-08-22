@@ -39,12 +39,7 @@ const RecipeDetails = () => {
 
   return (
     <div className="rd_container">
-      <div className="title-container">
-        {/* <img
-          src={`data:image/jpeg;base64,${recipe.image}`}
-          alt="Recipe Image"
-          className="recipe-image"
-        /> */}
+      <div className="rd-title-container">
         <h1 className="title">{recipe.name}</h1>
       </div>
 
