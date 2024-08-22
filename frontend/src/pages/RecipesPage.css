@@ -8,7 +8,6 @@ body {
 
 .recipe-wrapper {
   height: 100vh;
-  padding-top: 75px;
   box-sizing: border-box;
   padding-right: 5px;
   overflow-y: auto;

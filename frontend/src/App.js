@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route, useNavigate } from 'react-router-dom';
 import LandingPage from './pages/LandingPage';
 import RecipesPage from './pages/RecipesPage';
 import RecipeDetails from './components/RecipeDetails';
+import Navbar from './components/Navbar';
 import './App.css';
 
 function App() {
@@ -14,10 +15,7 @@ function App() {
 
   return (
     <div className="App">
-      <div className='logo-container' onClick={handleLogoClick} style={{ cursor: 'pointer' }}>
-        <img src='/catCook.png' alt='Website Logo' />
-        <h1>The Lazy Chef</h1>
-      </div>
+      <Navbar />
 
       <Routes>
         <Route path="/" element={<LandingPage />} />
