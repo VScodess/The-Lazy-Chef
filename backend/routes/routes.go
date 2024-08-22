@@ -26,4 +26,7 @@ func SetupRoutes(router *mux.Router) {
 	// Delete a recipe
 	router.HandleFunc("/recipes/{category}/{id}", handlers.DeleteRecipe).Methods("DELETE")
 
+	// Search recipes
+	router.HandleFunc("/recipes/search", handlers.SearchRecipe).Methods("GET");
+
 }
