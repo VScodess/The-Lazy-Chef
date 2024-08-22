@@ -1,34 +1,56 @@
-/* src/components/RecipeDetails.css */
+.rd_container {
+  max-width: 800px;
+  margin: 30px auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  text-align: left; /* Left-align all elements by default */
+}
 
-.container {
-    max-width: 800px;
-    margin: 30px auto;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-  }
-  
-  .title {
-    margin-bottom: 20px;
-  }
-  
-  .section {
-    margin-bottom: 30px;
-  }
-  
-  .section-title {
-    margin-bottom: 10px;
-  }
-  
-  .list {
-    list-style: none;
-    padding: 0;
-  }
-  
-  .list-item {
-    margin-bottom: 5px;
-  }
-  
-  .instructions {
-    line-height: 1.6;
-  }
+.rd-title-container {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+  margin-left: 25%;
+}
+
+.recipe-image {
+  width: 100px; /* Adjust as needed */
+  height: auto;
+}
+
+.rd-title {
+  margin: 0;
+  text-align: center; /* Align title to the left */
+}
+
+.ing_section {
+  margin-bottom: 30px;
+  margin-right: 500px;
+}
+
+.section {
+  margin-bottom: 30px;
+}
+
+.section-title {
+  margin-bottom: 10px;
+}
+
+.ing_list {
+  list-style-type: disc;
+  padding-left: 2ch;
+}
+
+.ing_list-item {
+  margin-bottom: 5px;
+}
+
+.ins_list {
+  list-style-type: decimal; /* Numbered list */
+  padding-left: 2ch;
+}
+
+.ins_list-item {
+  margin-bottom: 5px;
+}
