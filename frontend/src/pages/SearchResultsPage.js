@@ -11,6 +11,10 @@ const SearchResultsPage = () => {
 
    useEffect(() => {
       const fetchSearchResults = async () => {
+
+         setError(null);
+         setLoading(true);
+
          const query = new URLSearchParams(location.search).get('q');
          const category = new URLSearchParams(location.search).get('category');
          try {
