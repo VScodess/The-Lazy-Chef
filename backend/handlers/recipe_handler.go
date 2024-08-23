@@ -7,7 +7,6 @@ import (
 	"encoding/base64"
 	"encoding/json"
 	"io/ioutil"
-	"log"
 	"net/http"
 	"strings"
 	"time"
@@ -15,7 +14,6 @@ import (
 	"github.com/gorilla/mux"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/bson/primitive"
-	"go.mongodb.org/mongo-driver/mongo/options"
 )
 
 func GetRecipes(w http.ResponseWriter, r *http.Request) {
@@ -296,9 +294,10 @@ func DeleteRecipe(w http.ResponseWriter, r *http.Request) {
 
 func SearchRecipes(w http.ResponseWriter, r *http.Request) {
 	query := r.URL.Query().Get("q")
+	category := r.URL.Query().Get("category")
 
-	if query == "" {
-		http.Error(w, "Query parameter 'q' is requried", http.StatusBadRequest)
+	if query == "" || category == "" {
+		http.Error(w, "Both search query and category are required", http.StatusBadRequest)
 		return
 	}
 
@@ -307,22 +306,21 @@ func SearchRecipes(w http.ResponseWriter, r *http.Request) {
 	defer cancel()
 
 	filter := bson.M{
-		"$text": bson.M{
-			"$search": query,
+		"category": bson.M{"$regex": category, "$options": "i"},
+		"$or": []bson.M{
+			{"name": bson.M{"$regex": query, "$options": "i"}},
+			{"ingredients": bson.M{"$regex": query, "$options": "i"}},
+			{"tags": bson.M{"$regex": query, "$options": "i"}},
+			{"summary": bson.M{"$regex": query, "$options": "i"}},
 		},
 	}
 
-	opts := options.Find().SetSort(bson.M{"score": bson.M{"$meta": "textScore"}})
-
-	cursor, err := collection.Find(ctx, filter, opts)
+	cursor, err := collection.Find(ctx, filter)
 	if err != nil {
 		http.Error(w, "Could no perform search", http.StatusInternalServerError)
 		return
 	}
 	defer cursor.Close(ctx)
-
-	log.Println("Search query:", query)
-	log.Println("Filter applied:", filter)
 
 	var recipes []models.Recipe
 	for cursor.Next(ctx) {
@@ -339,7 +337,7 @@ func SearchRecipes(w http.ResponseWriter, r *http.Request) {
 	}
 
 	if len(recipes) == 0 {
-		http.Error(w, "No recipes found with your matching search", http.StatusNotFound)
+		http.Error(w, "No recipes found with your matching search and category", http.StatusNotFound)
 		return
 	}
 

@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter, Routes, Route, useNavigate } from 'react-router-dom';
 import LandingPage from './pages/LandingPage';
 import RecipesPage from './pages/RecipesPage';
+import SearchResultsPage from './pages/SearchResultsPage';
 import RecipeDetails from './components/RecipeDetails';
 import Navbar from './components/Navbar';
 import './App.css';
@@ -21,6 +22,7 @@ function App() {
         <Route path="/" element={<LandingPage />} />
         <Route path="/:mealType" element={<RecipesPage />} />
         <Route path="/:mealType/:recipeId" element={<RecipeDetails />} />
+        <Route path="/search" element={<SearchResultsPage />} />
       </Routes>
     </div>
   );
