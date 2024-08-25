@@ -7,19 +7,34 @@ services:
     container_name: mongodb
     ports:
       - "27017:27017"
-    # volumes:
-    #   - mongodb_data:/data/db
     networks:
       - app-network
 
+  # Data Loader Service
+  data-loader:
+    build:
+      context: ..
+      dockerfile: backend/Dockerfile.loader
+    container_name: data-loader
+    depends_on:
+      - mongodb
+    environment:
+      - MONGO_URI=mongodb://mongodb:27017/lazy_chef
+    networks:
+      - app-network
+    command: sh -c "until nc -z mongodb 27017; do echo 'Waiting for MongoDB...'; sleep 1; done && go run /app/scripts/loadData.go"
+
   # Backend Service
   backend:
-    build: .
+    build:
+      context: ..
+      dockerfile: backend/Dockerfile
     container_name: go-backend
     ports:
       - "8080:8080"
     depends_on:
       - mongodb
+      - data-loader
     environment:
       - MONGO_URI=mongodb://mongodb:27017/lazy_chef
     networks:
@@ -30,6 +45,3 @@ services:
 networks:
   app-network:
     driver: bridge
-
-# volumes:
-#   mongodb_data:

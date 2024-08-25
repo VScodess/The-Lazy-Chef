@@ -1,0 +1,17 @@
+# Dockerfile.loader
+
+# Use the official Go image with the appropriate version as the base image
+FROM golang:1.22-alpine
+
+# Set the Current Working Directory inside the container
+WORKDIR /app
+
+COPY backend /app
+
+COPY data/recipes.json /app/data/recipes.json
+
+WORKDIR /app/scripts
+
+
+# Set the entry point to load the data
+CMD ["go", "run", "loadData.go"]
