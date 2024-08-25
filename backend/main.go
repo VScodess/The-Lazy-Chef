@@ -1,6 +1,7 @@
 package main
 
 import (
+	"The-Lazy-Chef/backend/config"
 	"The-Lazy-Chef/backend/database"
 	"The-Lazy-Chef/backend/routes"
 	"log"
@@ -15,9 +16,12 @@ func main() {
 	// Connect to MongoDB
 	database.Connect()
 
+	// Load config
+	cfg := config.LoadConfig()
+
 	// Set up router with routes
 	router := mux.NewRouter()
-	routes.SetupRoutes(router)
+	routes.SetupRoutes(router, cfg)
 
 	// Enable CORS for all origins
 	corsOptions := handlers.CORS(
