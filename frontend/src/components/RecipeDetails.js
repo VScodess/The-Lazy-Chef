@@ -43,6 +43,12 @@ const RecipeDetails = () => {
         <h1 className="title">{recipe.name}</h1>
       </div>
 
+      <img
+        src={`data:image/jpeg;base64,${recipe.image}`}
+        alt="Recipe Image"
+        className="recipe-image"
+      />
+
       <div className="section">
         <div className="ingredient-container">
           <h2 className="section-title">Ingredients</h2>
@@ -54,11 +60,7 @@ const RecipeDetails = () => {
             ))}
           </ol>
         </div>
-        <img
-          src={`data:image/jpeg;base64,${recipe.image}`}
-          alt="Recipe Image"
-          className="recipe-image"
-        />
+
       </div>
 
       <div className="section">
