@@ -110,9 +110,6 @@ func fetchRecipeByID(cfg *config.Config, id string) (models.Recipe, error) {
 		return models.Recipe{}, err
 	}
 
-	// Convert the image to base64 for the response if necessary
-	recipe.Image = []byte(base64.StdEncoding.EncodeToString(recipe.Image))
-
 	return recipe, nil
 }
 

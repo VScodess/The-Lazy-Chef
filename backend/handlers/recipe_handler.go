@@ -2,8 +2,6 @@ package handlers
 
 import (
 	"The-Lazy-Chef/backend/config"
-	"The-Lazy-Chef/backend/models"
-	"encoding/base64"
 	"net/http"
 
 	"github.com/gorilla/mux"
@@ -39,21 +37,10 @@ func CreateRecipe(cfg *config.Config, w http.ResponseWriter, r *http.Request) {
 // GetRecipe retrieves a single recipe by ID.
 func GetRecipe(cfg *config.Config, w http.ResponseWriter, r *http.Request) {
 	id := mux.Vars(r)["id"]
-	recipe, err := fetchRecipeByID(cfg, id)
+	response, err := fetchRecipeByID(cfg, id)
 	if err != nil {
 		http.Error(w, "Recipe not found", http.StatusNotFound)
 		return
-	}
-
-	response := models.Recipe{
-		ID:          recipe.ID,
-		Name:        recipe.Name,
-		Category:    recipe.Category,
-		Ingredients: recipe.Ingredients,
-		Steps:       recipe.Steps,
-		Tags:        recipe.Tags,
-		Summary:     recipe.Summary,
-		Image:       []byte(base64.StdEncoding.EncodeToString(recipe.Image)),
 	}
 
 	respondWithJSON(w, http.StatusOK, response)
