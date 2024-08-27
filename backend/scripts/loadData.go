@@ -47,10 +47,10 @@ func main() {
 		Name        string `json:"name"`
 		Tags        string `json:"tags"`
 		Steps       string `json:"steps"`
-		Description string `json:"description"`
+		Summary     string `json:"summary"`
 		Ingredients string `json:"ingredients"`
 		Category    string `json:"category"`
-		ImageBytes  string `json:"image_bytes"`
+		Image       string `json:"image"`
 	}
 
 	err = json.Unmarshal(byteValue, &recipes)
@@ -64,7 +64,7 @@ func main() {
 
 	for _, recipe := range recipes {
 
-		imageData, err := base64.StdEncoding.DecodeString(recipe.ImageBytes)
+		imageData, err := base64.StdEncoding.DecodeString(recipe.Image)
 		if err != nil {
 			log.Fatal("Error decoding image data:", err)
 		}
@@ -80,7 +80,7 @@ func main() {
 			Ingredients: ingredients,
 			Steps:       steps,
 			Tags:        tags,
-			Summary:     recipe.Description,
+			Summary:     recipe.Summary,
 			Image:       imageData,
 		}
 
